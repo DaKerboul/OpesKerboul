@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+
+\title{Miz To LaTeX - DCS World v1.1.0\\ \large Documentation du Script \texttt{run\_gui.sh}}
+\author{Kerboul}
+\date{\today}
+
+% Définition de l'en-tête et du pied de page
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lfoot{Kerboul}
+\rfoot{Page \thepage}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Cette documentation détaille l'utilisation du script \texttt{run\_gui.py} dans le cadre du projet Miz To LaTeX pour DCS World. Le script \texttt{run\_gui.py} constitue le point d'entrée principal pour la génération de documents LaTeX à partir des briefings de missions DCS.
+
+\subsection{Objectif du Script}
+Le script \texttt{run\_gui.py} vise à simplifier le processus de création de documents LaTeX en extrayant automatiquement les informations pertinentes à partir des fichiers de mission DCS au format \texttt{.miz}. L'utilisateur peut ainsi générer rapidement des documents bien formatés à partir des données de briefing, facilitant la documentation des missions.
+
+\subsection{Environnement d'Exécution}
+Assurez-vous d'avoir un environnement Python correctement configuré, avec les dépendances nécessaires telles que \texttt{tkinter} installées. Le script \texttt{run\_gui.py} propose une interface graphique conviviale pour simplifier l'interaction de l'utilisateur avec le processus de génération.
+
+\subsection{Lancement du Script}
+Pour exécuter le script, ouvrez une invite de commande dans le répertoire contenant le script et lancez la commande suivante :
+\begin{verbatim}
+python run_gui.py
+\end{verbatim}\
+
+Ou sinon, utilisez directement \textbf{l'exécutable} \texttt{run\_gui.exe} pour lancer le script.\\
+
+Le script présentera une interface graphique permettant de sélectionner le fichier \texttt{.miz} de la mission à documenter, et générera automatiquement un fichier LaTeX à partir des informations extraites.
+
+\subsection{Références}
+Avant d'utiliser le script, veuillez consulter la documentation pour vous assurer que toutes les dépendances sont satisfaites et que le script est utilisé conformément aux recommandations fournies.
+
+\subsection{Fonctionnalités}
+
+Le script \texttt{run\_gui.py} offre plusieurs fonctionnalités pour simplifier le processus de génération de documents LaTeX à partir des briefings de missions DCS. Ces fonctionnalités comprennent :
+
+\begin{itemize}
+    \item \textbf{Extraction Automatique :} Le script permet à l'utilisateur de sélectionner un fichier \texttt{.miz} via une interface graphique conviviale. Il extrait automatiquement les informations pertinentes du briefing de la mission.
+
+    \item \textbf{Traitement des Informations :} Les informations extraites comprennent le nom de la mission, les notes de l'éditeur (briefing), et d'autres détails spécifiques. Le script utilise des expressions régulières pour extraire ces informations du fichier \texttt{dictionary} intégré dans le fichier \texttt{.miz}.
+
+    \item \textbf{Génération de Document LaTeX :} Le script crée un document LaTeX bien formaté en utilisant les informations extraites. Il génère automatiquement un titre, un contenu de briefing, et d'autres sections nécessaires pour produire un document structuré.
+
+    \item \textbf{Interface Graphique :} Le script utilise \texttt{tkinter} pour fournir une interface graphique conviviale. Cela permet à l'utilisateur de sélectionner le fichier \texttt{.miz} et de définir le nom du fichier LaTeX de sortie.
+
+    \item \textbf{Personnalisation :} Le script offre la possibilité de personnaliser le nom du fichier LaTeX de sortie, offrant ainsi une flexibilité d'utilisation.
+
+    \item \textbf{Nettoyage Automatique :} En option, l'utilisateur peut choisir de supprimer automatiquement le dossier temporaire créé pendant le processus d'extraction à la fin de l'exécution.
+\end{itemize}
+
+Ces fonctionnalités combinées offrent un moyen efficace et convivial de documenter les briefings de missions DCS en utilisant le format LaTeX.
+
+
+\subsection{Dépendances}
+
+Le bon fonctionnement du script \texttt{run\_gui.py} dépend de certaines bibliothèques Python qui doivent être installées dans votre environnement. Voici les principales dépendances utilisées par le script :
+
+\begin{itemize}
+    \item \textbf{\texttt{tkinter} :} Cette bibliothèque est utilisée pour la création de l'interface graphique du script. Assurez-vous que \texttt{tkinter} est correctement installé dans votre environnement Python.
+
+    \item \textbf{\texttt{zipfile, os, re} :} Ces modules sont utilisés pour le traitement des fichiers. \texttt{zipfile} est particulièrement utilisé pour extraire le contenu du fichier \texttt{.miz}. Vérifiez que ces modules sont disponibles dans votre installation Python standard.
+
+    \item \textbf{\texttt{messagebox} :} Cette bibliothèque fait partie de \texttt{tkinter} et est utilisée pour afficher des boîtes de dialogue d'information, d'avertissement, etc. Assurez-vous qu'elle est incluse avec votre installation de \texttt{tkinter}.
+\end{itemize}
+
+Veillez à ce que ces dépendances soient satisfaites avant d'exécuter le script. En cas de problème, consultez la documentation respective de chaque bibliothèque pour obtenir des instructions sur l'inst
+
+\subsection{Commentaires}
+
+Le script \texttt{run\_gui.py} est accompagné de commentaires explicatifs pour aider les utilisateurs et les développeurs à comprendre son fonctionnement interne. Ci-dessous, nous fournissons un aperçu des sections commentées les plus importantes :
+
+\begin{itemize}
+    \item \textbf{Sélection du Fichier .miz :} Le script commence par demander à l'utilisateur de sélectionner un fichier \texttt{.miz} via une boîte de dialogue. Cette section est commentée pour expliquer le processus d'interaction avec l'interface graphique.
+
+    \item \textbf{Extraction du Contenu :} Le script utilise le module \texttt{zipfile} pour extraire le contenu du fichier \texttt{.miz} dans un dossier temporaire. Les commentaires détaillent cette opération.
+
+    \item \textbf{Utilisation des Expressions Régulières :} Les commentaires expliquent comment le script utilise des expressions régulières (\texttt{re}) pour extraire des informations spécifiques du fichier \texttt{dictionary} contenu dans le dossier temporaire.
+
+    \item \textbf{Génération du Document LaTeX :} La section de création du document LaTeX est commentée pour expliquer comment le script construit le contenu LaTeX à partir des informations extraites.
+
+    \item \textbf{Interface Graphique :} Les parties du script liées à la création de l'interface graphique avec \texttt{tkinter} sont commentées pour aider à comprendre la mise en page et les fonctionnalités de l'interface utilisateur.
+
+    \item \textbf{Suppression du Dossier Temporaire :} En fin de script, il y a des commentaires expliquant la logique de suppression du dossier temporaire, en fonction de la préférence de l'utilisateur pour la suppression automatique.
+
+    \item \textbf{Personnalisation :} Les commentaires accompagnent les sections où l'utilisateur peut personnaliser le nom du fichier LaTeX de sortie.
+
+\end{itemize}
+
+Ces commentaires visent à faciliter la compréhension et la modification du script, offrant une documentation intégrée pour ceux qui explorent le code source.
+
+\section{Conclusion}
+Ce script offre une solution efficace pour générer des documents LaTeX à partir des briefings DCS. Assurez-vous d'avoir les dépendances nécessaires et testez le script avant la distribution.
+
+\end{document}
