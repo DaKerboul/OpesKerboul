@@ -9,7 +9,7 @@ import re
 
 
 def extraire_et_creer_latex():
-    # Demander à l'utilisateur de sélectionner les fichiers .miz
+    # Demander à l'utilisateur de sélectionner le fichier .miz
     fichier_miz = filedialog.askopenfilename(filetypes=[("Fichiers .miz", "*.miz")])
 
     if fichier_miz:
@@ -26,15 +26,19 @@ def extraire_et_creer_latex():
 
         # Utilisation de regex pour extraire les informations spécifiques
         pattern_mission_name = r'\["DictKey_missionName"\]\s*=\s*"([^"]*)"'
+        pattern_mission_name2 = r'\["DictKey_sortie_5"\]\s*=\s*"([^"]*)"'
         pattern_editor_notes = r'\["DictKey_briefing"\]\s*=\s*"([^"]*)"'
         pattern_description_text_1 = r'\["DictKey_descriptionText_1"\]\s*=\s*"([^"]*)"'
 
         match_mission_name = re.search(pattern_mission_name, contenu)
+        match_mission_name2 = re.search(pattern_mission_name2, contenu)
         match_editor_notes = re.search(pattern_editor_notes, contenu)
         match_description_text_1 = re.search(pattern_description_text_1, contenu)
 
-        if match_mission_name and (match_editor_notes or match_description_text_1):
-            mission_name = match_mission_name.group(1).replace('\\', '\\\\')
+        title_check = match_mission_name.group(1) if match_mission_name and match_mission_name.group(1) else match_mission_name2.group(1) if match_mission_name2 and match_mission_name2.group(1) else None
+
+        if title_check and (match_editor_notes or match_description_text_1):
+            mission_name = title_check.replace('\\', '\\\\')  # Remplacer les "\" par "\\"
             editor_notes = match_editor_notes.group(1).replace('\\', '\\\\') if match_editor_notes else ""
             description_text_1 = match_description_text_1.group(1).replace('\\',
                                                                            '\\\\') if match_description_text_1 else ""
@@ -56,7 +60,7 @@ def extraire_et_creer_latex():
 
                     \\maketitle
 
-                    \\section{{Editor Notes}}
+                    \\section{{Briefing}}
                     {editor_notes}
 
                     \\end{{document}}
