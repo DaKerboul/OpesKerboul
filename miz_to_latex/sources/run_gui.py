@@ -9,7 +9,7 @@ import re
 
 
 def extraire_et_creer_latex():
-    # Demander à l'utilisateur de sélectionner le fichier .miz
+    # Demander à l'utilisateur de sélectionner les fichiers .miz
     fichier_miz = filedialog.askopenfilename(filetypes=[("Fichiers .miz", "*.miz")])
 
     if fichier_miz:
@@ -80,13 +80,57 @@ def extraire_et_creer_latex():
 fenetre = tk.Tk()
 fenetre.title("Extraction et création LaTeX")
 
+# Redimensionner la fenêtre principale pour qu'elle ne soit pas trop petite
+fenetre.geometry("500x300")
+# Empêcher la fenêtre d'être redimensionnée
+fenetre.resizable(width=False, height=False)
+
+# Ajouter un label pour expliquer le fonctionnement du programme
+label = tk.Label(fenetre, text="Ce programme permet d'extraire les informations d'un fichier .miz et de créer un fichier LaTeX.")
+label.pack(padx=20, pady=20)
+# doit retourner à la ligne automatiquement
+label.config(wraplength=400)
+
+# Changer le titre de la fenêtre principale
+fenetre.title(".Miz to LaTeX - Extraction et création LaTeX")
+
 # Ajouter un bouton pour déclencher le processus
 bouton_extraction = tk.Button(fenetre, text="Extraire et créer LaTeX", command=extraire_et_creer_latex)
 bouton_extraction.pack(padx=20, pady=20)
+
+checkbox_destroyer = tk.BooleanVar()
+
+# Ajouter un bouton checkbox à coté du bouton de création
+bouton_checkbox = tk.Checkbutton(fenetre, text="Supprimer le dossier temporaire à la fin", variable=checkbox_destroyer)
+bouton_checkbox.pack(padx=20, pady=20)
+
+"""
+# Ajouter un bouton pour supprimer le dossier temporaire
+bouton_supprimer = tk.Button(fenetre, text="Supprimer le dossier temporaire", command=supprimer_dossier_temporaire)
+bouton_supprimer.pack(padx=20, pady=20)
+
+# Ajouter un bouton pour ouvrir le dossier temporaire
+bouton_ouvrir = tk.Button(fenetre, text="Ouvrir le dossier temporaire", command=ouvrir_dossier_temporaire)
+bouton_ouvrir.pack(padx=20, pady=20)
+"""
 
 # Ajouter un bouton pour quitter
 bouton_quitter = tk.Button(fenetre, text="Quitter", command=fenetre.quit)
 bouton_quitter.pack(padx=20, pady=20)
 
+fenetre.update()
 # Lancer la boucle principale de l'interface graphique
 fenetre.mainloop()
+
+# Supprimer le dossier temporaire
+dossier_extraction = 'dossier_extraction'
+if os.path.exists(dossier_extraction) and checkbox_destroyer.get():
+    for root, dirs, files in os.walk(dossier_extraction, topdown=False):
+        for name in files:
+            os.remove(os.path.join(root, name))
+        for name in dirs:
+            os.rmdir(os.path.join(root, name))
+
+    os.rmdir(dossier_extraction)
+
+# Fin du programme
